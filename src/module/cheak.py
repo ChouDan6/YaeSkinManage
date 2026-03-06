@@ -3,7 +3,6 @@ import sys
 
 import core
 
-
 ZIP_RUN = """初始化流程已被中止
 \n\n
 发生了什么？
@@ -75,12 +74,9 @@ def zip_direct_run():
 
 def miss_components():
     abnormality = False
-    basename = os.path.basename(sys.executable)
     msg = MISS_MODULE
-    if not basename in [core.env.cwd.self, "python.exe"]:
-        abnormality = True
-        msg += MISS_MODULE_BASENAME
-        core.log.warn(f"主程序名称为 {basename}")
+    
+    # 移除了关于 basename 的检查，避免改名后报错退出
 
     if not os.path.isfile(core.env.cwd.update):
         abnormality = True
